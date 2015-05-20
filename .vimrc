@@ -1,5 +1,6 @@
 execute pathogen#infect()
 
+set colorcolumn=80
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
 " you can find below.  If you wish to change any of those settings, you should
@@ -79,6 +80,14 @@ map <Tab> :bnext<CR>
 
 nnoremap <silent> <leader>zj zj
 nnoremap <silent> <leader>zk zk
+
+" enable/disable colorcolumn
+nnoremap <silent> <leader>cc :set colorcolumn=80<CR>
+nnoremap <silent> <leader>cd :set colorcolumn=0<CR>
+
+nnoremap <silent> <leader>pp :set paste<CR>:echo(':set paste')<Esc>
+nnoremap <silent> <leader>pd :set nopaste<CR>:echo(':set nopaste')<Esc>
+
 
 nnoremap <silent> zj :call NextClosedFold('j')<cr>
 nnoremap <silent> zk :call NextClosedFold('k')<cr>
