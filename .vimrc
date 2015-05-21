@@ -107,3 +107,6 @@ endfunction
 
 " ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
