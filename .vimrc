@@ -1,6 +1,17 @@
 execute pathogen#infect()
 
-set colorcolumn=80
+colorscheme joey
+
+" airline
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+let g:airline#extensions#tabline#enabled = 1
+" set colorcolumn=80
+"
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
 " you can find below.  If you wish to change any of those settings, you should
@@ -36,9 +47,9 @@ endif
 
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
-"if has("autocmd")
-"  filetype plugin indent on
-"endif
+if has("autocmd")
+  filetype plugin indent on
+endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -78,19 +89,57 @@ let mapleader = " "
 map <S-Tab> :bprevious<CR>
 map <Tab> :bnext<CR>
 
+" enable / disable colorcolumn
+nnoremap <leader>cc :set colorcolumn=80<CR>
+nnoremap <leader>cd :set colorcolumn=0<CR>
+
+" set paste / unset paste
+nnoremap <leader>pp :set paste!<CR>
+
+" unfold everything
+nnoremap <silent> <leader>zo ggvGzO<CR>:echo('everything unfolded!')<Esc>
+nnoremap <silent> <leader>zc ggvGzC<CR>:echo('everything folded!')<Esc>
+
+nnoremap <silent> <leader>zO ggvGzO<CR>:echo('everything unfolded!')<Esc>
+nnoremap <silent> <leader>zC ggvGzC<CR>:echo('everything folded!')<Esc>
+
+" jump to closed folds by default
+nnoremap zj :call NextClosedFold('j')<cr>
+nnoremap zk :call NextClosedFold('k')<cr>
+
+" remap zj and zk to be prefaced by leader key
 nnoremap <silent> <leader>zj zj
 nnoremap <silent> <leader>zk zk
 
-" enable/disable colorcolumn
-nnoremap <silent> <leader>cc :set colorcolumn=80<CR>
-nnoremap <silent> <leader>cd :set colorcolumn=0<CR>
+nnoremap <silent> <leader>zj zj
+nnoremap <silent> <leader>zk zk
 
-nnoremap <silent> <leader>pp :set paste<CR>:echo(':set paste')<Esc>
-nnoremap <silent> <leader>pd :set nopaste<CR>:echo(':set nopaste')<Esc>
+" show buffers
+nnoremap <leader>bls :ls<cr>:b<space>
 
+" show old
+nnoremap <leader>bo :browse old<CR>
 
-nnoremap <silent> zj :call NextClosedFold('j')<cr>
-nnoremap <silent> zk :call NextClosedFold('k')<cr>
+" save buffers to session, write / quit too
+nnoremap <silent> <leader>ss :set sessionoptions=buffers<CR>:mksession!<CR>:echo('saved buffers to Session.vim')<Esc>
+nnoremap <silent> <leader>ssw :set sessionoptions=buffers<CR>:mksession!<CR>:wa<CR>
+nnoremap <silent> <leader>ssq :set sessionoptions=buffers<CR>:mksession!<CR>:q<CR>
+nnoremap <silent> <leader>sswq :set sessionoptions=buffers<CR>:mksession!<CR>:wa<CR>:q<CR>
+
+" restore buffers
+nnoremap <silent> <leader>rs :source Session.vim<CR>:echo('session restored from Session.vim')<Esc>
+
+" spellcheck
+:map <leader>sc :setlocal spell! spelllang=en_us<CR>
+
+" swap carrot and octothorp
+nnoremap # ^
+nnoremap ^ #
+
+" clipboard
+set clipboard=unnamed
+nnoremap <leader>pb :r !pbpaste<CR>
+
 function! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
     let view = winsaveview()
@@ -109,4 +158,6 @@ endfunction
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " markdown
-autocmd BufNewFile,BufRead *.md set filetype=markdown
+" autocmd BufNewFile,BufRead *.md set filetype=markdown
+set cindent
+autocmd FileType python setlocal foldmethod=indent smartindent shiftwidth=4 ts=4 et cinwords=if,elif,else,for,while,try,except,finally,def,class
