@@ -90,7 +90,10 @@ map <S-Tab> :bprevious<CR>
 map <Tab> :bnext<CR>
 
 " enable / disable colorcolumn
-nnoremap <leader>cc :set colorcolumn=80<CR>
+" nnoremap <leader>cc :set colorcolumn=80<CR>
+nnoremap <leader>cc :let &colorcolumn = join(range(&tw ? &tw+1 : 81, &columns), ',')<CR>
+" ^ thanks mhi^
+
 nnoremap <leader>cd :set colorcolumn=0<CR>
 
 " set paste / unset paste
