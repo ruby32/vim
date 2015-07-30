@@ -1,6 +1,6 @@
 execute pathogen#infect()
 
-colorscheme joey
+" colorscheme joey
 
 " airline
 let g:airline_powerline_fonts = 1
@@ -10,8 +10,20 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 let g:airline#extensions#tabline#enabled = 1
+" let g:airline_theme='PaperColor-Dark'
 " set colorcolumn=80
-"
+
+" emoji 😄
+silent! if emoji#available()
+  " do something
+endif
+
+
+" change the behavior of c
+:set cpoptions+=$
+
+
+
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
 " /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
 " you can find below.  If you wish to change any of those settings, you should
@@ -100,11 +112,11 @@ nnoremap <leader>cd :set colorcolumn=0<CR>
 nnoremap <leader>pp :set paste!<CR>
 
 " unfold everything
-nnoremap <silent> <leader>zo ggvGzO<CR>:echo('everything unfolded!')<Esc>
-nnoremap <silent> <leader>zc ggvGzC<CR>:echo('everything folded!')<Esc>
+nnoremap <silent> <leader>zo mzggvGzO<CR>'z:echo('Unfolded all folds ' . emoji#for('book'))<Esc>
+nnoremap <silent> <leader>zc mzggvGzC<CR>'z:echo('Folded all folds ' . emoji#for('pray'))<Esc>
 
-nnoremap <silent> <leader>zO ggvGzO<CR>:echo('everything unfolded!')<Esc>
-nnoremap <silent> <leader>zC ggvGzC<CR>:echo('everything folded!')<Esc>
+nnoremap <silent> <leader>zO mzggvGzO<CR>'z:echo('Unfolded all folds ' . emoji#for('book'))<Esc>
+nnoremap <silent> <leader>zC mzggvGzC<CR>'z:echo('Folded all folds ' . emoji#for('pray'))<Esc>
 
 " jump to closed folds by default
 nnoremap zj :call NextClosedFold('j')<cr>
@@ -123,14 +135,19 @@ nnoremap <leader>bls :ls<cr>:b<space>
 " show old
 nnoremap <leader>bo :browse old<CR>
 
+" delete all buffers
+nnoremap <leader>bdd :%bdelete<CR>
+
 " save buffers to session, write / quit too
-nnoremap <silent> <leader>ss :set sessionoptions=buffers<CR>:mksession!<CR>:echo('saved buffers to Session.vim')<Esc>
-nnoremap <silent> <leader>ssw :set sessionoptions=buffers<CR>:mksession!<CR>:wa<CR>
+nnoremap <silent> <leader>ss :set sessionoptions=buffers<CR>:mksession!<CR>:echo('Saved buffers to Session.vim'. emoji#for('white_check_mark')<Esc>
+nnoremap <silent> <leader>ssw :set sessionoptions=buffers<CR>:mksession!<CR>:wa<CR>:echo('Saved all open buffers to disc ' . emoji#for('floppy_disk'))<CR>
 nnoremap <silent> <leader>ssq :set sessionoptions=buffers<CR>:mksession!<CR>:q<CR>
 nnoremap <silent> <leader>sswq :set sessionoptions=buffers<CR>:mksession!<CR>:wa<CR>:q<CR>
 
 " restore buffers
-nnoremap <silent> <leader>rs :source Session.vim<CR>:echo('session restored from Session.vim')<Esc>
+let sessionmsg = "session restored from Session.vim" + "!!"
+" let sessionmsg = "session restored from Session.vim" + emoji#for('sheep')
+nnoremap <silent> <leader>rs :source Session.vim<CR>:echo("Session restored from Session.vim " . emoji#for('white_check_mark'))<Esc>
 
 " spellcheck
 :map <leader>sc :setlocal spell! spelllang=en_us<CR>
