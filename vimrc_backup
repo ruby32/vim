@@ -18,8 +18,6 @@ silent! if emoji#available()
   " do something
 endif
 
-set number
-set relativenumber
 
 " change the behavior of c
 :set cpoptions+=$
@@ -105,11 +103,8 @@ map <Tab> :bnext<CR>
 
 " enable / disable colorcolumn
 " nnoremap <leader>cc :set colorcolumn=80<CR>
-nnoremap <leader>cc :let &colorcolumn = join(range(&tw ? &tw+1 : 111, &columns), ',')<CR>
+nnoremap <leader>cc :let &colorcolumn = join(range(&tw ? &tw+1 : 81, &columns), ',')<CR>
 " ^ thanks mhi^
-
-" split line
-nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>$a
 
 nnoremap <leader>cd :set colorcolumn=0<CR>
 
@@ -117,11 +112,11 @@ nnoremap <leader>cd :set colorcolumn=0<CR>
 nnoremap <leader>pp :set paste!<CR>
 
 " unfold everything
-nnoremap <silent> <leader>zo mzggvGzO<CR>'z:echo('Unfolded all folds ')<Esc>
-nnoremap <silent> <leader>zc mzggvGzC<CR>'z:echo('Folded all folds ')<Esc>
+nnoremap <silent> <leader>zo mzggvGzO<CR>'z:echo('Unfolded all folds ' . emoji#for('book'))<Esc>
+nnoremap <silent> <leader>zc mzggvGzC<CR>'z:echo('Folded all folds ' . emoji#for('pray'))<Esc>
 
-nnoremap <silent> <leader>zO mzggvGzO<CR>'z:echo('Unfolded all folds ')<Esc>
-nnoremap <silent> <leader>zC mzggvGzC<CR>'z:echo('Folded all folds ')<Esc>
+nnoremap <silent> <leader>zO mzggvGzO<CR>'z:echo('Unfolded all folds ' . emoji#for('book'))<Esc>
+nnoremap <silent> <leader>zC mzggvGzC<CR>'z:echo('Folded all folds ' . emoji#for('pray'))<Esc>
 
 " jump to closed folds by default
 nnoremap zj :call NextClosedFold('j')<cr>
@@ -144,22 +139,18 @@ nnoremap <leader>bo :browse old<CR>
 nnoremap <leader>bdd :%bdelete<CR>
 
 " save buffers to session, write / quit too
-nnoremap <silent> <leader>ss :set sessionoptions=buffers<CR>:mksession!<CR>:echo('Saved buffers to Session.vim')<Esc>
-nnoremap <silent> <leader>ssw :set sessionoptions=buffers<CR>:mksession!<CR>:wa<CR>:echo('Saved all open buffers to disc')<CR>
+nnoremap <silent> <leader>ss :set sessionoptions=buffers<CR>:mksession!<CR>:echo('Saved buffers to Session.vim'. emoji#for('white_check_mark')<Esc>
+nnoremap <silent> <leader>ssw :set sessionoptions=buffers<CR>:mksession!<CR>:wa<CR>:echo('Saved all open buffers to disc ' . emoji#for('floppy_disk'))<CR>
 nnoremap <silent> <leader>ssq :set sessionoptions=buffers<CR>:mksession!<CR>:q<CR>
 nnoremap <silent> <leader>sswq :set sessionoptions=buffers<CR>:mksession!<CR>:wa<CR>:q<CR>
 
 " restore buffers
 let sessionmsg = "session restored from Session.vim" + "!!"
 " let sessionmsg = "session restored from Session.vim" + emoji#for('sheep')
-nnoremap <silent> <leader>rs :source Session.vim<CR>:echo("Session restored from Session.vim ")<Esc>
+nnoremap <silent> <leader>rs :source Session.vim<CR>:echo("Session restored from Session.vim " . emoji#for('white_check_mark'))<Esc>
 
 " spellcheck
 :map <leader>sc :setlocal spell! spelllang=en_us<CR>
-
-" edit after jumping to end of word
-nnoremap <silent> <leader>e ea
-nnoremap <silent> <leader>E Ea
 
 " swap carrot and octothorp
 nnoremap # ^
