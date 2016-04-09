@@ -8,7 +8,7 @@
 " Scripts URL:  ???
 " Maintainer:   ???
 " Version:      ???
-" Last Change:  2014 January 10
+" Last Change:  2015 January 10
 " License:      MIT
 " Contributors: Daniel Herbert (pocketninja)
 "               Henry So, Jr. <henryso@panix.com>
@@ -17,7 +17,7 @@
 "               Andrew Wong (w0ng)
 "               Noel Cower (nilium)
 "
-" Copyright (c) 2009-2012, 2015 NanoTech
+" Copyright (c) 2009-2012 NanoTech
 "
 " Permission is hereby granted, free of charge, to any per‐
 " son obtaining a copy of this software and associated doc‐
@@ -296,12 +296,6 @@ if !exists("g:triplejelly_background_color")
   let g:triplejelly_background_color = "171719"
 end
 
-if !exists("g:triplejelly_linenr_color")
-"  let g:triplejelly_linenr_color = "0C0C0D"
-  let g:triplejelly_linenr_color = "131314"
-end  
-
-
 if !exists("g:triplejelly_foreground_color")
   let g:triplejelly_foreground_color="C6CFD2"
 end
@@ -356,22 +350,22 @@ call s:X("Visual","","344E6D","none","","DarkCyan")
 call s:X("VisualNOS","","344E6D","none","","DarkCyan")
 call s:X("Cursor",g:triplejelly_background_color,"33DDFF","",s:termBlack,"LightCyan")
 
-call s:X("LineNr","404040",g:triplejelly_linenr_color,"none",s:termBlack,"")
-call s:X("CursorLineNr","3aafe0",g:triplejelly_linenr_color,"none","DarkCyan","")
+call s:X("LineNr","404040",g:triplejelly_background_color,"none",s:termBlack,"")
+call s:X("CursorLineNr","3aafe0","","none","DarkCyan","")
 " Color test for comment
 call s:X("Comment",g:triplejelly_c_comment,"","none","Grey","")
 " TODO: Color test for todo
 call s:X("Todo","FF9F00","","none","White",s:termBlack)
 
 call s:X("StatusLine",g:triplejelly_background_color,"3EB2FC","none","","White")
-call s:X("StatusLineNC","757575","212121","none","Grey","DarkGrey")
+call s:X("StatusLineNC","ffffff","a6a6a6","none","White","Black")
 call s:X("VertSplit","","a6a6a6","",s:termBlack,s:termBlack)
 call s:X("WildMenu","f0a0c0","302028","","Magenta","")
 
 call s:X("Folded","a0a8b0","384048","none",s:termBlack,"")
 call s:X("FoldColumn","535D66","1f1f1f","","",s:termBlack)
-call s:X("SignColumn","404040",g:triplejelly_background_color,"","",s:termBlack)
-call s:X("ColorColumn","","222222","","",s:termBlack)
+call s:X("SignColumn","777777","333333","","",s:termBlack)
+call s:X("ColorColumn","","000000","","",s:termBlack)
 
 call s:X("Title","70b950","","none","Green","")
 
@@ -389,12 +383,9 @@ hi! link Conditional Control
 
 call s:X("Identifier",g:triplejelly_c_var,"","","LightCyan","")
 call s:X("Structure",g:triplejelly_c_type,"","","LightMagenta","")
-call s:X("Function",g:triplejelly_c_keyword,"","","LightYellow","")
-call s:X("FunctionName",g:triplejelly_c_func_name,"","","LightMagenta","")
+call s:X("Function",g:triplejelly_c_keyword,"","","LightMagenta","")
 hi! link Statement Control
 call s:X("PreProc","8fbfdc","","","LightBlue","")
-call s:X("StorageClass",g:triplejelly_c_storage,"","","Red","")
-call s:X("MemberAccess", g:triplejelly_c_call, "", "", "LightBlue", "")
 
 call s:X("Operator",g:triplejelly_c_operator,"","","LightBlue","")
 
@@ -403,7 +394,7 @@ call s:X("NonText","555E4F","","","Grey","")
 
 call s:X("SpecialKey","444444","1c1c1c","",s:termBlack,"")
 
-call s:X("Search","DFDFDF","5F00FF","none","White","DarkCyan")
+call s:X("Search","C6CFD2","1a364a","none","White","DarkCyan")
 
 call s:X("Directory","dad085","","","Yellow","")
 call s:X("ErrorMsg","","902020","","","DarkRed")
@@ -430,6 +421,20 @@ call s:X("DiffText","8fbfdc","000000","reverse","Yellow","")
 
 hi! link diffRemoved DiffDelete
 hi! link diffAdded DiffAdd
+
+" PHP
+
+hi! link phpFunctions Function
+call s:X("StorageClass",g:triplejelly_c_storage,"","","Red","")
+hi! link phpSuperglobal Identifier
+hi! link phpQuoteSingle StringDelimiter
+hi! link phpQuoteDouble StringDelimiter
+hi! link phpBoolean Constant
+hi! link phpNull Constant
+hi! link phpArrayPair Operator
+hi! link phpOperator Normal
+hi! link phpRelation Normal
+hi! link phpVarSelector Identifier
 
 " Python
 
@@ -518,40 +523,15 @@ hi! link goFloats goStorage
 hi! link goComplexes goStorage
 
 call s:X("goFunction", g:triplejelly_c_func_name, "", "", "LightMagenta", "")
-hi! link goType StorageClass
+call s:X("goType",g:triplejelly_c_storage,"","","LightRed","")
 hi! link goStructDef goFunction
 hi! link goStruct goFunction
 hi! link goMethod goFunction
 
-" PHP
-
-func! s:OverridePHPSyntax()
-  hi! link phpFunctions Function
-  hi! link phpSuperglobal Constant
-  hi! link phpArrayPair Operator
-
-  hi! link phpType StorageClass
-  hi! link phpFunction FunctionName
-  hi! link phpMethod FunctionName
-
-  hi! link phpVarSelector Identifier
-  hi! link phpMethodsVar MemberAccess
-
-  " Doc tags
-  hi! link phpDocTags Keyword
-  hi! link phpDocParam StorageClass
-  hi! link phpDocIdentifier Identifier
-endfunc
-
-augroup triplejellyPHP
-au!
-au FileType php call <SID>OverridePHPSyntax()
-augroup END
 
 " Vimscript
 
 hi! link vimOper Normal
-hi! link vimUserFunc FunctionName
 
 " Debugger.vim
 
@@ -563,8 +543,8 @@ call s:X("DbgBreakPt","","4F0037","","","DarkMagenta")
 if !exists("g:indent_guides_auto_colors")
   let g:indent_guides_auto_colors = 0
 endif
-call s:X("IndentGuidesOdd","","1d1d1d","","","")
-call s:X("IndentGuidesEven","","28292a","","","")
+call s:X("IndentGuidesOdd","","232323","","","")
+call s:X("IndentGuidesEven","","1b1b1b","","","")
 
 " Plugins, etc.
 
@@ -577,26 +557,21 @@ end
 " Manual overrides for 256-color terminals. Dark colors auto-map badly.
 " TODO: Port from jellybeans
 if !s:low_color
-  hi Search ctermbg=57 ctermfg=188
-  hi StatusLineNC ctermbg=232 ctermfg=244
-  hi Folded ctermbg=235
-  hi FoldColumn ctermbg=235
+  hi StatusLineNC ctermbg=235
+  hi Folded ctermbg=236
+  hi FoldColumn ctermbg=234
+  hi SignColumn ctermbg=236
   hi CursorColumn ctermbg=234
-  hi ColorColumn ctermbg=234
   hi CursorLine ctermbg=234
-  hi CursorLineNr ctermbg=234
   hi SpecialKey ctermbg=234
-  exec "hi NonText ctermbg=".g:triplejelly_background_color_256." ctermfg=236"
+  exec "hi NonText ctermbg=".g:triplejelly_background_color_256
   exec "hi LineNr ctermbg=".g:triplejelly_background_color_256
-  exec "hi SignColumn ctermbg=".g:triplejelly_background_color_256
-  hi DiffText ctermfg=75
+  hi DiffText ctermfg=81
   exec "hi Normal ctermbg=".g:triplejelly_background_color_256
-  hi DbgBreakPt ctermbg=26
-  hi IndentGuidesOdd ctermbg=234
-  hi IndentGuidesEven ctermbg=235
+  hi DbgBreakPt ctermbg=53
+  hi IndentGuidesOdd ctermbg=235
+  hi IndentGuidesEven ctermbg=234
 endif
-
-hi UnderWord term=underline cterm=underline gui=underline
 
 if exists("g:triplejelly_overrides")
   fun! s:load_colors(defs)
