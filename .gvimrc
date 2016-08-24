@@ -5,7 +5,8 @@ set guifont=Meslo\ LG\ M\ DZ\ Regular\ for\ Powerline:h11
 " colorscheme base16-default
 set background=dark
 set t_Co=256
-colorscheme triplejelly
+colorscheme Tomorrow-Night-Bright
+" colorscheme triplejelly
 " colorscheme PaperColor-Dark
 
 " disable bell

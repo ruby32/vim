@@ -25,6 +25,19 @@ set relativenumber
 " change the behavior of c
 :set cpoptions+=$
 
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
 
 
 " All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
@@ -108,9 +121,6 @@ map <Tab> :bnext<CR>
 " nnoremap <leader>cc :set colorcolumn=80<CR>
 nnoremap <leader>cc :let &colorcolumn = join(range(&tw ? &tw+1 : 111, &columns), ',')<CR>
 " ^ thanks mhi^
-
-" for MatchTagAlways
-nnoremap <leader>% :MtaJumpToOtherTag<cr>
 
 " split line
 nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>$a
