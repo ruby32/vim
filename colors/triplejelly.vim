@@ -296,12 +296,6 @@ if !exists("g:triplejelly_background_color")
   let g:triplejelly_background_color = "171719"
 end
 
-if !exists("g:triplejelly_linenr_color")
-"  let g:triplejelly_linenr_color = "0C0C0D"
-  let g:triplejelly_linenr_color = "131314"
-end  
-
-
 if !exists("g:triplejelly_foreground_color")
   let g:triplejelly_foreground_color="C6CFD2"
 end
@@ -356,8 +350,8 @@ call s:X("Visual","","344E6D","none","","DarkCyan")
 call s:X("VisualNOS","","344E6D","none","","DarkCyan")
 call s:X("Cursor",g:triplejelly_background_color,"33DDFF","",s:termBlack,"LightCyan")
 
-call s:X("LineNr","404040",g:triplejelly_linenr_color,"none",s:termBlack,"")
-call s:X("CursorLineNr","3aafe0",g:triplejelly_linenr_color,"none","DarkCyan","")
+call s:X("LineNr","404040",g:triplejelly_background_color,"none",s:termBlack,"")
+call s:X("CursorLineNr","3aafe0","","none","DarkCyan","")
 " Color test for comment
 call s:X("Comment",g:triplejelly_c_comment,"","none","Grey","")
 " TODO: Color test for todo
